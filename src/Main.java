@@ -11,15 +11,15 @@ public class Main
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext(springXmlPath);
 
-        SimilarDataBase printor = ctx.getBean(SimilarDataBase.class);
+        SimilarDataBase DB = ctx.getBean(SimilarDataBase.class);
 
         System.out.println("UnCrypt " + ctx.getBean("HappyEnd"));
 
-        printor.insert(ctx.getBean("HappyEnd"));
+        DB.insert(ctx.getBean("HappyEnd"));
 
         System.out.println("UnCrypt " + ctx.getBean("HappyEnd"));
 
-        printor.insert(ctx.getBean("banana"));
+        DB.insert(ctx.getBean("banana"));
 
         System.out.println("UnCrypt " + ctx.getBean("banana"));
     }
