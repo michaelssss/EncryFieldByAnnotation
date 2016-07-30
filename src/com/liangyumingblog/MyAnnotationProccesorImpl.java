@@ -14,10 +14,12 @@ public class MyAnnotationProccesorImpl extends MyAnnotationProccesorAbstract imp
 {
 
     @Override
-    public void process(Object object)
-        throws IllegalArgumentException, IllegalAccessException
+    public Object process(Object object)
+        throws Exception
     {
-        this.setClazz(object);
+        Class clzz = object.getClass();
+        Object o = object.getClass().newInstance();
+        this.setClazz(clzz);
         for (Field field : fields)
         {
             if (field.isAnnotationPresent(EncryField.class))
@@ -28,16 +30,24 @@ public class MyAnnotationProccesorImpl extends MyAnnotationProccesorAbstract imp
                 }
                 EncryField getEncryWay = field.getAnnotation(EncryField.class);
                 String EncryWay = getEncryWay.way();
-                field.set(object, EncryWay);
+                field.set(o, EncryWay);
+            }
+            else
+            {
+                field.setAccessible(true);
+                Field field1 = clzz.getDeclaredField(field.getName());
+                field1.setAccessible(true);
+                field.set(o, field1.get(object));
             }
         }
+        return o;
     }
 
     @Around("execution(* com.liangyumingblog.Printor.print(..))")
     public void join(ProceedingJoinPoint joinPoint)
         throws Throwable
     {
-        this.process(joinPoint.getArgs()[0]);
-        joinPoint.proceed();
+
+        joinPoint.proceed(new Object[] {this.process(joinPoint.getArgs()[0])});
     }
 }

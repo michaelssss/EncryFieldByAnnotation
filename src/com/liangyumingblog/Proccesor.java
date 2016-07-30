@@ -7,6 +7,6 @@ import org.aspectj.lang.annotation.Aspect;
 public interface Proccesor
 {
 
-    void process(Object o)
-        throws IllegalArgumentException, IllegalAccessException;
+    Object process(Object o)
+        throws Exception;
 }

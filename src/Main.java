@@ -16,6 +16,11 @@ public class Main
         System.out.println("UnCrypt " + ctx.getBean("HappyEnd"));
 
         printor.print(ctx.getBean("HappyEnd"));
+
+        System.out.println("UnCrypt " + ctx.getBean("HappyEnd"));
+
         printor.print(ctx.getBean("banana"));
+
+        System.out.println("UnCrypt " + ctx.getBean("banana"));
     }
 }

@@ -4,10 +4,9 @@ package com.liangyumingblog;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-
 public abstract class MyAnnotationProccesorAbstract
 {
-    protected Object object;
+    protected Class<?> clazz;
 
     protected Field[] fields;
 
@@ -15,17 +14,17 @@ public abstract class MyAnnotationProccesorAbstract
 
     private void setFieldContent()
     {
-        fields = object.getClass().getDeclaredFields();
+        fields = clazz.getDeclaredFields();
     }
 
     private void setMethods()
     {
-        methods = object.getClass().getDeclaredMethods();
+        methods = clazz.getDeclaredMethods();
     }
 
-    protected void setClazz(Object object)
+    protected void setClazz(Class<?> clazz)
     {
-        this.object = object;
+        this.clazz = clazz;
         setFieldContent();
         setMethods();
     }
