@@ -1,4 +1,4 @@
-import com.liangyumingblog.Printor;
+import com.liangyumingblog.SimilarDataBase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -11,15 +11,15 @@ public class Main
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext(springXmlPath);
 
-        Printor printor = ctx.getBean(Printor.class);
+        SimilarDataBase printor = ctx.getBean(SimilarDataBase.class);
 
         System.out.println("UnCrypt " + ctx.getBean("HappyEnd"));
 
-        printor.print(ctx.getBean("HappyEnd"));
+        printor.insert(ctx.getBean("HappyEnd"));
 
         System.out.println("UnCrypt " + ctx.getBean("HappyEnd"));
 
-        printor.print(ctx.getBean("banana"));
+        printor.insert(ctx.getBean("banana"));
 
         System.out.println("UnCrypt " + ctx.getBean("banana"));
     }

@@ -43,7 +43,7 @@ public class MyAnnotationProccesorImpl extends MyAnnotationProccesorAbstract imp
         return o;
     }
 
-    @Around("execution(* com.liangyumingblog.Printor.print(..))")
+    @Around("execution(* com.liangyumingblog.SimilarDataBase.insert(..))")
     public void join(ProceedingJoinPoint joinPoint)
         throws Throwable
     {
