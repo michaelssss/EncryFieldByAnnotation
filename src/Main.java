@@ -13,14 +13,21 @@ public class Main
 
         SimilarDataBase DB = ctx.getBean(SimilarDataBase.class);
 
-        System.out.println("UnCrypt " + ctx.getBean("HappyEnd"));
-
+        print("Now Insert these Object " + ctx.getBean("HappyEnd") + "|" + ctx.getBean("HappyEnd"));
+        
         DB.insert(ctx.getBean("HappyEnd"));
-
-        System.out.println("UnCrypt " + ctx.getBean("HappyEnd"));
 
         DB.insert(ctx.getBean("banana"));
 
-        System.out.println("UnCrypt " + ctx.getBean("banana"));
+        print("Now query these Object " + ctx.getBean("HappyEnd") + "|" + ctx.getBean("HappyEnd"));
+
+        DB.query(ctx.getBean("HappyEnd"));
+
+        DB.query(ctx.getBean("banana"));
+    }
+
+    static void print(Object o)
+    {
+        System.out.println(o);
     }
 }

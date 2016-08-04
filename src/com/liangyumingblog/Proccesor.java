@@ -7,6 +7,6 @@ import org.aspectj.lang.annotation.Aspect;
 public interface Proccesor
 {
 
-    Object process(Object o)
+    Object process(Object o, boolean decry)
         throws Exception;
 }

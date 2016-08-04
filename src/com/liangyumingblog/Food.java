@@ -1,12 +1,11 @@
 
 package com.liangyumingblog;
 
-
 public class Food
 {
     private String name;
 
-    @EncryField(way = "I Got Encry")
+    @SensitiveField(encryWay = "I Got Encry", decryWay = "I Got Decry")
     private String owner;
 
     public String getName()

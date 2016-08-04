@@ -7,7 +7,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface DecryField
+public @interface SensitiveField
 {
-    String way() default "";
+    String encryWay();
+
+    String decryWay();
 }

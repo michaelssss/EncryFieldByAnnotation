@@ -14,7 +14,7 @@ public class MyAnnotationProccesorImpl extends MyAnnotationProccesorAbstract imp
 {
 
     @Override
-    public Object process(Object object)
+    public Object process(Object object, boolean decry)
         throws Exception
     {
         Class clzz = object.getClass();
@@ -22,15 +22,19 @@ public class MyAnnotationProccesorImpl extends MyAnnotationProccesorAbstract imp
         this.setClazz(clzz);
         for (Field field : fields)
         {
-            if (field.isAnnotationPresent(EncryField.class))
+            if (field.isAnnotationPresent(SensitiveField.class))
             {
                 if (!field.isAccessible())
                 {
                     field.setAccessible(true);
                 }
-                EncryField getEncryWay = field.getAnnotation(EncryField.class);
-                String EncryWay = getEncryWay.way();
-                field.set(o, EncryWay);
+                SensitiveField getWay = field.getAnnotation(SensitiveField.class);
+                String Way;
+                if (decry)
+                    Way = getWay.decryWay();
+                else
+                    Way = getWay.encryWay();
+                field.set(o, Way);
             }
             else
             {
@@ -44,10 +48,18 @@ public class MyAnnotationProccesorImpl extends MyAnnotationProccesorAbstract imp
     }
 
     @Around("execution(* com.liangyumingblog.SimilarDataBase.insert(..))")
-    public void join(ProceedingJoinPoint joinPoint)
+    public void encry(ProceedingJoinPoint joinPoint)
         throws Throwable
     {
 
-        joinPoint.proceed(new Object[] {this.process(joinPoint.getArgs()[0])});
+        joinPoint.proceed(new Object[] {this.process(joinPoint.getArgs()[0], false)});
+    }
+
+    @Around("execution(* com.liangyumingblog.SimilarDataBase.query(..))")
+    public void decry(ProceedingJoinPoint joinPoint)
+        throws Throwable
+    {
+
+        joinPoint.proceed(new Object[] {this.process(joinPoint.getArgs()[0], true)});
     }
 }

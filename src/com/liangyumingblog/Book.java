@@ -8,7 +8,7 @@ public class Book
 
     private String author;
 
-    @EncryField(way = "I Get Encry")
+    @SensitiveField(encryWay = "I Get Encry", decryWay = "I Got Decry")
     private String buyer;
 
     public String getName()
